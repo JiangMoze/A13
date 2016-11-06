@@ -11,7 +11,7 @@
         <property name="fname">
             <column name="fname" sql-type="varchar(20)" length="20" not-null="true"/>
         </property>
-        <set name="son" inverse="true" >
+        <set name="son" inverse="true" cascade="all">
             <key>
                 <column name="fid" not-null="true"/>
             </key>
