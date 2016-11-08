@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.weikun.pojo.Father" table="father" schema="test">
+    <class name="com.weikun.pojo.Father" table="father" schema="test" lazy="false">
         <id name="fid">
             <column name="fid" sql-type="int(11)"/>
             <generator class="identity"/>
@@ -12,7 +12,7 @@
         <property name="fname">
             <column name="fname" sql-type="varchar(20)" length="20" not-null="true"/>
         </property>
-        <set name="sons" inverse="true" cascade="all">
+        <set name="sons" inverse="true" cascade="all" lazy="true" >
             <key>
                 <column name="fid"/>
             </key>

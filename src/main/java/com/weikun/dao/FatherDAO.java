@@ -1,12 +1,12 @@
 package com.weikun.dao;
 
 import com.weikun.pojo.Father;
+import com.weikun.pojo.Report;
 import com.weikun.pojo.Son;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.beanvalidation.HibernateTraversableResolver;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Iterator;
@@ -27,23 +27,112 @@ public class FatherDAO {
         sessionFactory = config.buildSessionFactory();
     }
     @Test
-    public void queryAll(){
+    public void testLazy(){
+        Father f= queryFather();
+        System.out.print(f.getFname());
+
+        Set<Son> s=f.getSons();
+
+        Iterator<Son> it=s.iterator();
+
+        while(it.hasNext()){
+            System.out.println(it.next().getSname());
+        }
+
+    }
+
+    @Test
+    public void dynamicQuery(){
+
         session=sessionFactory.openSession();
-        Query q=session.createQuery("from Father as ");//Hibernate Query Language
 
-        List<Father> list=q.list();
+        try {
 
-        for( Father f:list){
+            Query q=session.createQuery("select new com.weikun.pojo.Report(fid,fname) from Father as f");
 
-            System.out.print(f.getFname());
-
-            Set <Son> s=f.getSons();
-            Iterator <Son>it=s.iterator();
+            Iterator <Report>it=q.list().iterator();
 
             while(it.hasNext()){
-               System.out.println(it.next().getSname());
+
+                Report r=it.next();
+                System.out.println(r.getFname()+"--"+r.getFid());
             }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+            session.close();
         }
+    }
+    @Test
+    public void queryField(){
+        session=sessionFactory.openSession();
+
+        try {
+
+            Query q=session.createQuery("select fname,fid from Father as f");
+            Iterator it=q.list().iterator();
+
+            while(it.hasNext()){
+
+                Object [] os=(Object [])it.next();
+                System.out.println(os[0]+"---"+os[1]);
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+    }
+
+    public Father queryFather(){
+
+        session=sessionFactory.openSession();
+        Father f=null;
+        try {
+            f=session.load(Father.class,2);
+            if(!Hibernate.isInitialized(f.getSons())){
+                Hibernate.initialize(f.getSons());
+            }
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return f;
+    }
+
+    @Test
+    public void queryAll(){
+        session=sessionFactory.openSession();
+        Query q=session.createQuery("from Father as f ");//Hibernate Query Language
+        q.setCacheable(true);
+        List<Father> list=q.list();
+        System.out.print(list);
+        list=q.list();
+        System.out.print(list);
+//        for( Father f:list){
+//
+//            System.out.print(f.getFname());
+//
+//            Set <Son> s=f.getSons();
+//            Iterator <Son>it=s.iterator();
+//
+//            while(it.hasNext()){
+//               System.out.println(it.next().getSname());
+//            }
+//        }
+
+
+
+
+
+
     }
 
     @Test

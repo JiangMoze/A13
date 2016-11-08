@@ -21,6 +21,7 @@ public class TeaDAO {
         config = new Configuration().configure("/hibernate.cfg.xml");
         sessionFactory = config.buildSessionFactory();
     }
+
     @Test
     public void del(){
         session=sessionFactory.openSession();
