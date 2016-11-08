@@ -9,10 +9,14 @@
     </property>
 
     <property name="hibernate.connection.url">jdbc:mysql://192.168.1.133:3306/test</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">root</property>
     <property name="hibernate.connection.driverClassName">
       com.mysql.jdbc.Driver
+    </property>
+    <property name="hibernate.connection.username">
+      root
+    </property>
+    <property name="hibernate.connection.password">
+      root
     </property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.current_session_context_class">
@@ -21,8 +25,6 @@
 
     <property name="hibernate.format_sql">true</property>
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-
-
     <mapping resource="Bbsuser.hbm.xml" />
     <mapping resource="Hus.hbm.xml"/>
     <mapping resource="Wife.hbm.xml"/>
@@ -30,6 +32,9 @@
     <mapping resource="Father.hbm.xml"/>
     <mapping resource="Son.hbm.xml"/>
 
+    <mapping resource="Stu.hbm.xml"/>
+    <mapping resource="Tea.hbm.xml"/>
+    <mapping resource="Teastu.hbm.xml"/>
 
 
   </session-factory>

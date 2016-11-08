@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.weikun.pojo.Teastu" table="teastu" schema="test">
+        <composite-id mapped="true" class="com.weikun.pojo.TeastuPK">
+            <key-property name="tid">
+                <column name="tid" sql-type="int(11)"/>
+            </key-property>
+            <key-property name="sid">
+                <column name="sid" sql-type="int(11)"/>
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

@@ -1,14 +1,15 @@
 package com.weikun.pojo;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Administrator on 2016/11/6.
+ * Created by Administrator on 2016/11/8.
  */
 public class Father {
     private int fid;
     private String fname;
-    private Set<Son> son;
+    private Set<Son> sons=new HashSet<Son>();
 
     public int getFid() {
         return fid;
@@ -46,11 +47,11 @@ public class Father {
         return result;
     }
 
-    public Set<Son> getSon() {
-        return son;
+    public Set<Son> getSons() {
+        return sons;
     }
 
-    public void setSon(Set<Son> son) {
-        this.son = son;
+    public void setSons(Set<Son> sons) {
+        this.sons = sons;
     }
 }

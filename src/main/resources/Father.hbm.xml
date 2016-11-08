@@ -7,13 +7,14 @@
     <class name="com.weikun.pojo.Father" table="father" schema="test">
         <id name="fid">
             <column name="fid" sql-type="int(11)"/>
+            <generator class="identity"/>
         </id>
         <property name="fname">
             <column name="fname" sql-type="varchar(20)" length="20" not-null="true"/>
         </property>
-        <set name="son" inverse="true" cascade="all">
+        <set name="sons" inverse="true" cascade="all">
             <key>
-                <column name="fid" not-null="true"/>
+                <column name="fid"/>
             </key>
             <one-to-many not-found="ignore" class="com.weikun.pojo.Son"/>
         </set>

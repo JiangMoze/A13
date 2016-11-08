@@ -1,12 +1,15 @@
 package com.weikun.pojo;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by Administrator on 2016/11/8.
  */
-public class Son {
+public class Stu {
     private int sid;
     private String sname;
-    private Father father;
+    private Set<Tea> teas=new HashSet<Tea>();
 
     public int getSid() {
         return sid;
@@ -29,10 +32,10 @@ public class Son {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Son son = (Son) o;
+        Stu stu = (Stu) o;
 
-        if (sid != son.sid) return false;
-        if (sname != null ? !sname.equals(son.sname) : son.sname != null) return false;
+        if (sid != stu.sid) return false;
+        if (sname != null ? !sname.equals(stu.sname) : stu.sname != null) return false;
 
         return true;
     }
@@ -44,11 +47,11 @@ public class Son {
         return result;
     }
 
-    public Father getFather() {
-        return father;
+    public Set<Tea> getTeas() {
+        return teas;
     }
 
-    public void setFather(Father father) {
-        this.father = father;
+    public void setTeas(Set<Tea> teas) {
+        this.teas = teas;
     }
 }
